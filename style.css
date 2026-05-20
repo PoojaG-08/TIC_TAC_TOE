@@ -8,49 +8,48 @@ body {
     text-align: center;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, black, blue);
-    padding: 10px;
-    box-sizing: border-box;
 }
 
-/* Responsive heading */
+/* Title */
 h1 {
     color: white;
     margin: 10px 0;
-    font-size: clamp(28px, 5vw, 42px);
+    font-size: 40px;
 }
 
-/* Status text */
+/* Status */
 #status {
     color: white;
-    font-size: clamp(16px, 3.5vw, 22px);
+    font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
 }
 
-/* Board becomes flexible */
+/* BOARD = BOX METHOD */
 .board {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(60px, 100px));
+    display: flex;
+    flex-wrap: wrap;
+    width: 330px;              /* 3 boxes * 100px + gaps */
     gap: 10px;
     justify-content: center;
-    margin: 20px 0;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 10px;
 }
 
-/* Cells scale automatically */
+/* EACH CELL = BOX */
 .cell {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    font-size: clamp(24px, 6vw, 40px);
-    cursor: pointer;
+    width: 100px;
+    height: 100px;
     background: white;
     border: 2px solid black;
     border-radius: 10px;
-    transition: 0.3s;
+    font-size: 40px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 .cell:hover {
@@ -58,7 +57,7 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Win animation */
+/* WIN EFFECT */
 .win {
     background: #4CAF50;
     color: white;
@@ -70,10 +69,10 @@ h1 {
     to { transform: scale(1.15); }
 }
 
-/* Button */
+/* RESET BUTTON */
 #reset {
     padding: 10px 25px;
-    font-size: clamp(14px, 3vw, 18px);
+    font-size: 18px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -87,9 +86,9 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Winner image */
+/* WIN IMAGE */
 #winnerImage {
-    width: clamp(80px, 20vw, 120px);
+    width: 120px;
     display: none;
     margin: 15px 0;
     animation: zoom 1s infinite alternate;
@@ -100,7 +99,7 @@ h1 {
     to { transform: scale(1.2); }
 }
 
-/* Confetti */
+/* CONFETTI */
 #confetti-container {
     position: fixed;
     inset: 0;
@@ -111,31 +110,27 @@ h1 {
 
 .confetti {
     position: absolute;
-    width: 8px;
-    height: 12px;
+    width: 10px;
+    height: 14px;
     border-radius: 3px;
     animation: fall linear forwards;
 }
 
 @keyframes fall {
-    from {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-    }
+    from { transform: translateY(0) rotate(0deg); opacity: 1; }
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
 
-/* Extra mobile tuning */
-@media (max-width: 480px) {
+/* MOBILE FIX (BOX SHRINK) */
+@media (max-width: 400px) {
     .board {
+        width: 300px;
         gap: 8px;
-        padding: 10px;
     }
 
     .cell {
-        border-radius: 8px;
+        width: 90px;
+        height: 90px;
+        font-size: 34px;
     }
 }
