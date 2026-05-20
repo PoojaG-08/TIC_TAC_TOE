@@ -1,57 +1,71 @@
-body {
+/* RESET */
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px;
     text-align: center;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, black, blue);
 }
 
-/* Title */
+/* TITLE */
 h1 {
     color: white;
-    margin: 10px 0;
-    font-size: 40px;
+    margin-bottom: 10px;
+    font-size: clamp(2rem, 5vw, 3rem);
 }
 
-/* Status */
+/* STATUS */
 #status {
     color: white;
-    font-size: 20px;
+    font-size: clamp(1rem, 3vw, 1.4rem);
     font-weight: bold;
-    margin: 10px 0;
+    margin-bottom: 15px;
 }
 
-/* BOARD = BOX METHOD */
+/* BOARD */
 .board {
-    display: flex;
-    flex-wrap: wrap;
-    width: 330px;              /* 3 boxes * 100px + gaps */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    width: min(90vw, 360px);
+    aspect-ratio: 1;
+
     gap: 10px;
-    justify-content: center;
-    padding: 10px;
+    margin-bottom: 20px;
 }
 
-/* EACH CELL = BOX */
+/* CELL */
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    aspect-ratio: 1;
+
     background: white;
     border: 2px solid black;
-    border-radius: 10px;
-    font-size: 40px;
+    border-radius: 12px;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
+    font-size: clamp(2rem, 8vw, 3rem);
+    font-weight: bold;
+
     cursor: pointer;
     transition: 0.3s;
 }
 
+/* HOVER */
 .cell:hover {
     background: #ffe066;
     transform: scale(1.05);
@@ -65,19 +79,27 @@ h1 {
 }
 
 @keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.15); }
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
 }
 
 /* RESET BUTTON */
 #reset {
-    padding: 10px 25px;
-    font-size: 18px;
+    padding: 12px 28px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
+
     border: none;
     border-radius: 10px;
+
     cursor: pointer;
+
     background: black;
     color: white;
+
     transition: 0.3s;
 }
 
@@ -88,49 +110,70 @@ h1 {
 
 /* WIN IMAGE */
 #winnerImage {
-    width: 120px;
+    width: min(30vw, 140px);
     display: none;
     margin: 15px 0;
+
     animation: zoom 1s infinite alternate;
 }
 
 @keyframes zoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.2); }
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15);
+    }
 }
 
 /* CONFETTI */
 #confetti-container {
     position: fixed;
     inset: 0;
+
     pointer-events: none;
     overflow: hidden;
+
     z-index: 9999;
 }
 
 .confetti {
     position: absolute;
+
     width: 10px;
     height: 14px;
+
     border-radius: 3px;
+
     animation: fall linear forwards;
 }
 
 @keyframes fall {
-    from { transform: translateY(0) rotate(0deg); opacity: 1; }
-    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
 }
 
-/* MOBILE FIX (BOX SHRINK) */
-@media (max-width: 400px) {
+/* MOBILE */
+@media (max-width: 480px) {
+
+    body {
+        padding: 15px;
+    }
+
     .board {
-        width: 300px;
+        width: 95vw;
         gap: 8px;
     }
 
-    .cell {
-        width: 90px;
-        height: 90px;
-        font-size: 34px;
+    #reset {
+        width: 100%;
+        max-width: 220px;
     }
 }
