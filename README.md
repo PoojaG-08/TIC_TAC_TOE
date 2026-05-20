@@ -27,12 +27,15 @@ This project provides a clean user interface, smooth gameplay experience, and re
 
 ## 📂 Project Structure
 
+## 📂 Project Structure
+
 ```bash
 tic-tac-toe/
 │
 ├── index.html
 ├── style.css
 ├── script.js
+├── win.jpg
 └── README.md
 ```
 
