@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right,black, blue);
+    min-height: 100vh;
+}
+
+h1 {
+    color: white;
+    margin-top: 20px;
+}
+
+#status {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+    cursor: pointer;
+    background: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.cell:hover {
+    background: #ffe066;
+    transform: scale(1.05);
+}
+
+.win {
+    background: #4CAF50;
+    color: white;
+    animation: pulse 0.8s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.15); }
+}
+
+#reset {
+    padding: 10px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: black;
+    color: white;
+}
+
+#reset:hover {
+    background: #333;
+}
+
+/* Winner image */
+#winnerImage {
+    width: 120px;
+    display: none;
+    margin: 15px auto;
+    animation: zoom 1s infinite alternate;
+}
+
+@keyframes zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+}
+
+/* Confetti */
+#confetti-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 14px;
+    border-radius: 3px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
