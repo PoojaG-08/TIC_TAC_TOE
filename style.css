@@ -16,19 +16,31 @@ body {
     text-align: center;
     font-family: Arial, sans-serif;
     background: linear-gradient(to right, black, blue);
+    overflow-x: hidden; /* Prevents any accidental side-scrolling from confetti */
+}
+
+/* GAME CONTAINER: Keeps desktop structured and mobile contained */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 450px; /* Keeps everything grouped beautifully on desktop */
+    margin: auto;     /* Centers the block perfectly if the screen is huge */
 }
 
 /* TITLE */
 h1 {
     color: white;
     margin-bottom: 10px;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Slightly optimized for tiny screens */
 }
 
 /* STATUS */
 #status {
     color: white;
-    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-size: clamp(1rem, 3vw, 1.3rem);
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -37,18 +49,19 @@ h1 {
 .board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-
-    width: min(90vw, 360px);
-    aspect-ratio: 1;
-
+    
+    /* Safely handles both narrow phones and short/wide screens */
+    width: min(85vw, 340px); 
+    height: min(85vw, 340px); 
+    
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px auto;
 }
 
 /* CELL */
 .cell {
     width: 100%;
-    aspect-ratio: 1;
+    height: 100%; /* Matches the explicit board height */
 
     background: white;
     border: 2px solid black;
@@ -58,17 +71,17 @@ h1 {
     justify-content: center;
     align-items: center;
 
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2rem, 8vw, 3.5rem);
     font-weight: bold;
 
     cursor: pointer;
-    transition: 0.3s;
+    transition: transform 0.2s, background-color 0.2s;
 }
 
 /* HOVER */
 .cell:hover {
     background: #ffe066;
-    transform: scale(1.05);
+    transform: scale(1.02); /* Slightly gentler scale to avoid clipping grid lines */
 }
 
 /* WIN EFFECT */
@@ -83,24 +96,22 @@ h1 {
         transform: scale(1);
     }
     to {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
 
 /* RESET BUTTON */
 #reset {
     padding: 12px 28px;
-    font-size: clamp(1rem, 3vw, 1.2rem);
+    font-size: clamp(1rem, 3vw, 1.1rem);
 
     border: none;
     border-radius: 10px;
-
     cursor: pointer;
 
     background: black;
     color: white;
-
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 #reset:hover {
@@ -110,70 +121,57 @@ h1 {
 
 /* WIN IMAGE */
 #winnerImage {
-    width: min(30vw, 140px);
+    width: min(25vw, 100px); /* Tamed the size so it doesn't push elements off-screen */
     display: none;
     margin: 15px 0;
-
     animation: zoom 1s infinite alternate;
 }
 
 @keyframes zoom {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.15);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
 }
 
 /* CONFETTI */
 #confetti-container {
     position: fixed;
     inset: 0;
-
     pointer-events: none;
     overflow: hidden;
-
     z-index: 9999;
 }
 
 .confetti {
     position: absolute;
-
     width: 10px;
     height: 14px;
-
     border-radius: 3px;
-
     animation: fall linear forwards;
 }
 
 @keyframes fall {
     from {
-        transform: translateY(0) rotate(0deg);
+        transform: translateY(-20px) rotate(0deg); /* Starts just off-screen */
         opacity: 1;
     }
-
     to {
-        transform: translateY(100vh) rotate(720deg);
+        transform: translateY(102vh) rotate(720deg);
         opacity: 0;
     }
 }
 
-/* MOBILE */
+/* MOBILE OPTIMIZATIONS */
 @media (max-width: 480px) {
-
     body {
-        padding: 15px;
+        padding: 10px;
     }
 
     .board {
-        width: 95vw;
-        gap: 8px;
+        gap: 8px; /* Tighter gaps look cleaner on smaller displays */
     }
 
     #reset {
         width: 100%;
-        max-width: 220px;
+        max-width: 200px;
     }
 }
